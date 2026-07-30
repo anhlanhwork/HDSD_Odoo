@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export interface TocEntry {
   id: string
@@ -58,11 +58,16 @@ export function useFeaturePanels(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef, featureIdsKey, view])
 
-  // Build the TOC for the active view: its h3 headings, falling back to
-  // step titles if it has none (e.g. a single flat list of steps).
-  const tocItems = useMemo<TocEntry[]>(() => {
+  // Build the TOC for the active view: its h3/h4 headings (matching main.js's
+  // buildFeatureToc, which harvests both levels by direct element reference
+  // rather than requiring pre-authored ids), falling back to step titles if
+  // the view has neither. This runs in an effect (not useMemo) because
+  // containerRef.current is only populated after commit, and a ref alone
+  // never triggers a re-render to let a memo pick that up.
+  const [tocItems, setTocItems] = useState<TocEntry[]>([])
+  useEffect(() => {
     const root = containerRef.current
-    if (!root) return []
+    if (!root) { setTocItems([]); return }
     const children = Array.from(root.children) as HTMLElement[]
     const featureSet = new Set(featureIds)
     let group = 'overview'
@@ -78,11 +83,19 @@ export function useFeaturePanels(
       if (group === view) scopes.push(el)
     })
     const entries: TocEntry[] = []
+    let anchorIdx = 0
+    const harvest = (h: Element) => {
+      const depth = h.tagName === 'H3' ? 2 : 3
+      let id = h.id
+      if (!id) {
+        id = `__toc-${anchorIdx++}`
+        h.setAttribute('data-toc-anchor', id)
+      }
+      entries.push({ id, label: h.textContent?.trim() || '', depth })
+    }
     scopes.forEach((scope) => {
-      if (scope.tagName === 'H3' && scope.id) entries.push({ id: scope.id, label: scope.textContent?.trim() || '', depth: 2 })
-      scope.querySelectorAll('h3[id]').forEach((h) => {
-        entries.push({ id: h.id, label: h.textContent?.trim() || '', depth: 2 })
-      })
+      if (scope.tagName === 'H3' || scope.tagName === 'H4') harvest(scope)
+      scope.querySelectorAll('h3, h4').forEach(harvest)
     })
     if (!entries.length) {
       let i = 0
@@ -96,7 +109,7 @@ export function useFeaturePanels(
         })
       })
     }
-    return entries
+    setTocItems(entries)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef, featureIdsKey, view])
 

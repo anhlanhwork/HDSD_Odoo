@@ -275,11 +275,16 @@ export const docPages: DocPage[] = [
       { id: 'mapping-trang-thai', label: 'Mapping trạng thái đơn hàng' },
       { id: 'tao-moi-gian-hang', label: 'Khai báo và xác thực gian hàng TMĐT' },
       { id: 'cap-nhat-gian-hang', label: 'Cập nhật thông tin gian hàng' },
-      { id: 'import-san-pham', label: 'Import Sản phẩm & Kho hàng' },
-      { id: 'mapping-san-pham-kho', label: 'Mapping Sản phẩm & Kho hàng' },
+      { id: 'lay-id-shop', label: 'Hướng dẫn lấy ID Shop' },
+      { id: 'import-san-pham', label: 'Import và mapping sản phẩm' },
+      { id: 'mapping-san-pham-kho', label: 'Import Kho và mapping kho' },
       { id: 'cap-nhat-ton-len-san', label: 'Cập nhật tồn kho lên sàn' },
-      { id: 'dong-bo-don-hang', label: 'Đồng bộ Đơn hàng' },
-      { id: 'danh-sach-khach-hang', label: 'Danh sách khách hàng' },
+      { id: 'cap-nhat-nguong-ton-kho', label: 'Cấu hình ngưỡng đồng bộ tồn kho Odoo → Sàn TMĐT' },
+      { id: 'dong-bo-don-hang', label: 'Tổng quan luồng đồng bộ' },
+      { id: 'dong-bo-don-hang-import', label: 'Đồng bộ đơn hàng từ sàn về module E-com' },
+      { id: 'cap-nhat-chi-tiet-don-section', label: 'Cập nhật chi tiết đơn Ecom' },
+      { id: 'danh-sach-khach-hang', label: 'Đồng bộ danh sách khách hàng' },
+      { id: 'tao-don-noi-bo', label: 'Tạo đơn nội bộ từ đơn Ecom' },
     ],
     sidebarTree: [
       {
@@ -289,13 +294,29 @@ export const docPages: DocPage[] = [
       {
         label: 'Tính năng và quy trình',
         children: [
-          { label: 'Gian hàng', children: [{ id: 'tao-moi-gian-hang' }, { id: 'cap-nhat-gian-hang' }] },
+          {
+            label: 'Khai báo và xác thực gian hàng TMĐT',
+            children: [{ id: 'tao-moi-gian-hang' }, { id: 'cap-nhat-gian-hang' }, { id: 'lay-id-shop' }],
+          },
           {
             label: 'Đồng bộ Sản phẩm & Kho',
-            children: [{ id: 'import-san-pham' }, { id: 'mapping-san-pham-kho' }, { id: 'cap-nhat-ton-len-san' }],
+            children: [
+              { id: 'import-san-pham' },
+              { id: 'mapping-san-pham-kho' },
+              { id: 'cap-nhat-ton-len-san' },
+              { id: 'cap-nhat-nguong-ton-kho' },
+            ],
           },
-          { id: 'dong-bo-don-hang' },
-          { id: 'danh-sach-khach-hang' },
+          {
+            label: 'Đồng bộ Đơn hàng & Khách hàng',
+            children: [
+              { id: 'dong-bo-don-hang' },
+              { id: 'dong-bo-don-hang-import' },
+              { id: 'cap-nhat-chi-tiet-don-section' },
+              { id: 'danh-sach-khach-hang' },
+              { id: 'tao-don-noi-bo' },
+            ],
+          },
         ],
       },
     ],
