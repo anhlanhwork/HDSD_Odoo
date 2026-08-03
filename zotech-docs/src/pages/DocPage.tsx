@@ -11,11 +11,13 @@ import { useInternalLinks } from '../hooks/useInternalLinks'
 import crmHtml from '../content/crm.html?raw'
 import logisticsHtml from '../content/logistics.html?raw'
 import ecommerceHtml from '../content/ecommerce.html?raw'
+import hoaDonHtml from '../content/hoa-don.html?raw'
 
 const CONTENT_MAP: Record<string, string> = {
   crm: crmHtml,
   logistics: logisticsHtml,
   ecommerce: ecommerceHtml,
+  'hoa-don': hoaDonHtml,
 }
 
 export const DocPage: React.FC = () => {

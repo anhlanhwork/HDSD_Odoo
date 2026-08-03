@@ -59,6 +59,50 @@ export const docPages: DocPage[] = [
       { id: 'tab-chi-tiet-don', label: 'Tab Chi tiết đơn đối soát' },
     ],
   },
+  {
+    slug: 'hoa-don',
+    title: 'Hóa đơn điện tử',
+    group: 'Kế toán',
+    // Matches the real hoa-don.html source exactly (provided directly by the
+    // user, ahead of user_guide/). Overview-only h2s ('muc-dich',
+    // 'so-do-quy-trinh', 'cau-hinh', 'cau-hinh-hddt', 'quy-trinh-tinh-nang')
+    // are intentionally excluded from toc, same pattern as CRM's 'muc-dich'
+    // etc. — only the ids wrapped in <section class="yc-doc"> become their
+    // own feature panel/sidebar leaf.
+    toc: [
+      { id: 'du-lieu-hoa-don-dien-tu', label: 'Dữ liệu hóa đơn điện tử' },
+      { id: 'cau-hinh-tich-hop-gian-hang', label: 'Cấu hình tích hợp HĐĐT trên gian hàng' },
+      { id: 'dich-vu-hoa-don', label: 'Dịch vụ hóa đơn điện tử' },
+      { id: 'trang-thai-hoa-don', label: 'Trạng thái hóa đơn' },
+      { id: 'mau-hoa-don-misa', label: 'Mẫu hóa đơn Misa' },
+      { id: 'mau-hoa-don-minvoice', label: 'Mẫu hóa đơn Minvoice' },
+      { id: 'chi-tiet-trang-thai-hoa-don', label: 'Chi tiết trạng thái hóa đơn' },
+      { id: 'quy-trinh-xuat-hoa-don-tmdt', label: 'Quy trình xuất HĐĐT từ sàn TMĐT' },
+    ],
+    // Matches the source's embedded sidebar: two module-level groups, each
+    // itself a bare (non-clickable) h2 whose intro text stays in the
+    // overview — same trade-off as CRM/ecommerce group headers.
+    sidebarTree: [
+      {
+        label: 'Cấu hình hóa đơn điện tử',
+        children: [
+          { id: 'dich-vu-hoa-don' },
+          { id: 'trang-thai-hoa-don' },
+          { id: 'mau-hoa-don-misa' },
+          { id: 'mau-hoa-don-minvoice' },
+          { id: 'chi-tiet-trang-thai-hoa-don' },
+        ],
+      },
+      {
+        label: 'Quy trình và tính năng',
+        children: [
+          { id: 'du-lieu-hoa-don-dien-tu' },
+          { id: 'cau-hinh-tich-hop-gian-hang' },
+          { id: 'quy-trinh-xuat-hoa-don-tmdt' },
+        ],
+      },
+    ],
+  },
 
   // Chuỗi cung ứng
   {
@@ -504,13 +548,13 @@ export const getPageBySlug = (slug: string): DocPage | undefined => {
 
 // Slugs that have real ported article content (see src/content/<slug>.html).
 // Everything else falls back to a placeholder in DocPage.
-export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce'])
+export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don'])
 
 // Deploy-time visibility gate: only these modules appear on the homepage
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
