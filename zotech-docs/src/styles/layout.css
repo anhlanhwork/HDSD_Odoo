@@ -286,9 +286,6 @@
 .sb-root-children > .sb-node > .sb-group .sb-chev { color: var(--color-accent-500); }
 .sb-root-children > .sb-node > .sb-group:hover { color: var(--color-accent-700); }
 .sb-root-children > .sb-node > .sb-group.is-onpath { color: var(--color-accent-700); font-weight: var(--fw-semibold); }
-.sb-root-static { cursor: default; }
-.sb-root-static:hover { background: transparent; }
-
 /* ---- Mua hàng: 3 collapsible sub-groups (no icons, normal case) ---- */
 .sb-subgroup { padding-top: 9px; padding-bottom: 5px; }
 .sb-subgroup > .sb-row-label {

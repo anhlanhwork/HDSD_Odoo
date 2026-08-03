@@ -189,10 +189,10 @@ export const Sidebar: React.FC = () => {
     <aside className="sidebar no-scrollbar" aria-label="Mục lục tài liệu">
       <nav className="sb-tree">
         <div className="sb-node sb-root-node">
-          <div className="sb-row sb-group sb-root-group sb-root-static" aria-expanded="true">
+          <Link to="/" className="sb-row sb-group sb-root-group">
             <span className="sb-rootg-mark"><BookIcon /></span>
             <span className="sb-row-label">Tài liệu hướng dẫn sử dụng</span>
-          </div>
+          </Link>
           <div className="sb-children sb-root-children">
             {groups.map((group) => {
               const groupOpen = openGroups.has(group)
