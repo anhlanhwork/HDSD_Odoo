@@ -138,6 +138,7 @@ export const docPages: DocPage[] = [
     title: 'Logistics',
     group: 'Chuỗi cung ứng',
     toc: [
+      { id: 'thiet-lap-don-vi-van-chuyen', label: 'Thiết lập đơn vị vận chuyển' },
       { id: 'tao-lenh-van-chuyen', label: 'Tạo lệnh vận chuyển' },
       { id: 'theo-doi-lo-trinh', label: 'Theo dõi lộ trình giao hàng' },
       { id: 'quan-ly-cuoc-phi', label: 'Quản lý cước phí vận chuyển' },
@@ -176,31 +177,57 @@ export const docPages: DocPage[] = [
       { id: 'tt-kh-thanh-toan', label: 'Thanh toán (Khách hàng)' },
       { id: 'tt-ncc-hoa-don', label: 'Hoá đơn phải trả (Nhà cung cấp)' },
     ],
-    // NOTE: unlike CRM, this grouping is NOT confirmed against a real
-    // sidebar screenshot — it's a reasonable best guess (flat, no 3rd
-    // nesting level) pending the actual source. Revisit if it turns out
-    // logistics also nests like CRM's "Tính năng mở rộng".
+    // Matches the real sidebar tree exactly (confirmed via the source
+    // Claude Design project, logistics.html). Note two ids that exist as
+    // in-page h2s (via toc, reachable from the right-hand TOC) but are
+    // NOT exposed as their own left-sidebar leaves in the real tree:
+    // 'thiet-lap-don-vi-van-chuyen' and the four feature-walkthrough ids
+    // (tao-lenh-van-chuyen / theo-doi-lo-trinh / quan-ly-cuoc-phi /
+    // doi-soat-bao-cao) — same pattern as CRM's overview-only sections.
+    // 'cfg-hang-hoa-item' is likewise in-page-only (not in the real tree).
     sidebarTree: [
       {
         label: 'Thiết lập & cấu hình',
         children: [
-          'cfg-hang-van-chuyen', 'cfg-cang', 'cfg-tuyen-van-chuyen', 'cfg-loai-hang-hoa', 'cfg-hang-hoa-item',
-          'cfg-cuoc-van-chuyen', 'cfg-mau-kien-hang', 'cfg-kieu-dong-goi', 'cfg-hs-code', 'cfg-lop-hang-nguy-hiem',
-          'cfg-un-number', 'cfg-loai-phi', 'cfg-phuong-thuc-van-chuyen', 'cfg-phuong-thuc-dong-goi',
-          'cfg-giai-doan-lo-hang', 'cfg-trang-thai-lo-hang', 'cfg-incoterms', 'cfg-dieu-khoan-dich-vu',
-          'cfg-dieu-khoan-thanh-toan', 'cfg-trang-thai-van-chuyen', 'cfg-trang-thai-don-giao-hang',
-        ].map((id) => ({ id })),
+          { label: 'Hành trình', children: ['cfg-hang-van-chuyen', 'cfg-cang', 'cfg-tuyen-van-chuyen'].map((id) => ({ id })) },
+          { label: 'Cấu hình bảng giá vận chuyển', children: ['cfg-cuoc-van-chuyen', 'cfg-loai-phi'].map((id) => ({ id })) },
+          {
+            label: 'Cấu hình hàng hóa & đóng gói',
+            children: [
+              {
+                label: 'Cấu hình hàng hóa nhận vận chuyển',
+                children: ['cfg-loai-hang-hoa', 'cfg-hs-code', 'cfg-lop-hang-nguy-hiem', 'cfg-un-number'].map((id) => ({ id })),
+              },
+              {
+                label: 'Cấu hình phương thức đóng gói kiện hàng',
+                children: ['cfg-mau-kien-hang', 'cfg-kieu-dong-goi', 'cfg-phuong-thuc-dong-goi'].map((id) => ({ id })),
+              },
+            ],
+          },
+          {
+            label: 'Theo dõi & trạng thái lô hàng',
+            children: ['cfg-giai-doan-lo-hang', 'cfg-trang-thai-lo-hang', 'cfg-trang-thai-van-chuyen', 'cfg-trang-thai-don-giao-hang'].map((id) => ({ id })),
+          },
+          {
+            label: 'Điều khoản & phương thức vận chuyển',
+            children: ['cfg-phuong-thuc-van-chuyen', 'cfg-incoterms', 'cfg-dieu-khoan-dich-vu', 'cfg-dieu-khoan-thanh-toan'].map((id) => ({ id })),
+          },
+        ],
       },
       {
-        label: 'Thông tin liên quan',
+        label: 'Quy trình và tính năng',
         children: [
-          'tt-co-hoi', 'tt-don-hang', 'tt-job', 'tt-pickup', 'tt-theo-doi-lo-trinh', 'tt-ma-van-don',
-          'tt-lh-khach-hang', 'tt-lh-ncc', 'tt-lh-shipper', 'tt-kh-hoa-don', 'tt-kh-thanh-toan', 'tt-ncc-hoa-don',
-        ].map((id) => ({ id })),
-      },
-      {
-        label: 'Các tính năng & quy trình',
-        children: ['tao-lenh-van-chuyen', 'theo-doi-lo-trinh', 'quan-ly-cuoc-phi', 'doi-soat-bao-cao'].map((id) => ({ id })),
+          { label: 'Kinh doanh', children: ['tt-co-hoi', 'tt-don-hang'].map((id) => ({ id })) },
+          { label: 'Vận hành', children: ['tt-job', 'tt-pickup', 'tt-theo-doi-lo-trinh', 'tt-ma-van-don'].map((id) => ({ id })) },
+          {
+            label: 'Kế toán',
+            children: [
+              { label: 'Khách hàng', children: ['tt-kh-hoa-don', 'tt-kh-thanh-toan'].map((id) => ({ id })) },
+              { label: 'Nhà cung cấp', children: ['tt-ncc-hoa-don'].map((id) => ({ id })) },
+            ],
+          },
+          { label: 'Liên hệ', children: ['tt-lh-khach-hang', 'tt-lh-ncc', 'tt-lh-shipper'].map((id) => ({ id })) },
+        ],
       },
     ],
   },
@@ -554,7 +581,7 @@ export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 

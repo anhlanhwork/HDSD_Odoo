@@ -369,11 +369,13 @@ code:not(pre code) {
 }
 .accordion-item.is-open .accordion-chev { transform: rotate(180deg); color: var(--color-accent-600); }
 .accordion-content {
+  display: none;
   padding: 0 var(--space-1) var(--space-5);
   color: var(--fg-default);
   font-size: 14.5px;
   line-height: 24px;
 }
+.accordion-item.is-open .accordion-content { display: block; }
 
 /* ---------- Data table ---------- */
 .table-wrap {

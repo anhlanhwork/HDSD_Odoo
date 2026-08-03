@@ -7,6 +7,7 @@ import { getPageBySlug, isPublicPage } from '../utils/content'
 import { useFeaturePanels, scrollToTocTarget } from '../hooks/useFeaturePanels'
 import { useLightbox } from '../hooks/useLightbox'
 import { useInternalLinks } from '../hooks/useInternalLinks'
+import { useAccordion } from '../hooks/useAccordion'
 
 import crmHtml from '../content/crm.html?raw'
 import logisticsHtml from '../content/logistics.html?raw'
@@ -31,6 +32,7 @@ export const DocPage: React.FC = () => {
   const { tocItems, activeTocId } = useFeaturePanels(containerRef, featureIds, activeFeature)
   useLightbox(containerRef)
   useInternalLinks(containerRef, slug, featureIds)
+  useAccordion(containerRef)
 
   if (!page) {
     return (
