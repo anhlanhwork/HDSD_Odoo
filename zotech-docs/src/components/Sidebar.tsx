@@ -213,6 +213,23 @@ export const Sidebar: React.FC = () => {
                       {getPublicPagesByGroup(group).map((page) => {
                         const modOpen = openMods.has(page.slug)
                         const isCurrentPage = activeSlug === page.slug
+                        // A page with no toc entries and no explicit sidebarTree is a
+                        // single flat article (e.g. a one-off guide, not a module with
+                        // its own overview + features) — render it as a plain link
+                        // instead of an expandable group with an empty subtree.
+                        const isFlatPage = page.toc.length === 0 && !page.sidebarTree?.length && !page.overviewExtra?.length
+                        if (isFlatPage) {
+                          return (
+                            <div className="sb-node" key={page.slug}>
+                              <Link
+                                to={`/docs/${page.slug}`}
+                                className={`sb-row sb-mod${isCurrentPage ? ' is-active' : ''}`}
+                              >
+                                <span className="sb-row-label">{page.title}</span>
+                              </Link>
+                            </div>
+                          )
+                        }
                         return (
                           <div className="sb-node" key={page.slug}>
                             <Link
