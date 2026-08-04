@@ -13,12 +13,14 @@ import crmHtml from '../content/crm.html?raw'
 import logisticsHtml from '../content/logistics.html?raw'
 import ecommerceHtml from '../content/ecommerce.html?raw'
 import hoaDonHtml from '../content/hoa-don.html?raw'
+import batXacThuc2LopHtml from '../content/bat-xac-thuc-2-lop.html?raw'
 
 const CONTENT_MAP: Record<string, string> = {
   crm: crmHtml,
   logistics: logisticsHtml,
   ecommerce: ecommerceHtml,
   'hoa-don': hoaDonHtml,
+  'bat-xac-thuc-2-lop': batXacThuc2LopHtml,
 }
 
 export const DocPage: React.FC = () => {

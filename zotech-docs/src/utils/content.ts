@@ -47,6 +47,21 @@ export interface DocPage {
 // stale, missing the ~30 granular config/reference sub-sections that
 // now exist as their own h2s in the current source page.
 export const docPages: DocPage[] = [
+  // Tài khoản & Bảo mật
+  {
+    slug: 'bat-xac-thuc-2-lop',
+    title: 'Bật xác thực 2 lớp',
+    group: 'Tài khoản & Bảo mật',
+    // Single continuous guide (not a multi-feature module) — toc is
+    // intentionally empty so none of its h2 sections gets treated as a
+    // routable feature panel by useFeaturePanels, which would otherwise
+    // hide every section except whichever one matches the URL. All 4
+    // sections stay visible together, matching the source's one-page
+    // walkthrough. Trade-off: the right-hand "Trên trang này" rail (which
+    // only auto-harvests h3/h4) is empty here, same as other overview-only
+    // pages in this app (e.g. logistics' FAQ section).
+    toc: [],
+  },
   // Kế toán
   {
     slug: 'doi-soat-du-lieu',
@@ -559,7 +574,7 @@ export const docPages: DocPage[] = [
 ]
 
 // Category order as it appears in the source sidebar/homepage.
-export const GROUP_ORDER = ['Kế toán', 'Chuỗi cung ứng', 'Bán hàng & Khách hàng', 'Nhân sự', 'Vận hành']
+export const GROUP_ORDER = ['Tài khoản & Bảo mật', 'Kế toán', 'Chuỗi cung ứng', 'Bán hàng & Khách hàng', 'Nhân sự', 'Vận hành']
 
 export const getPagesByGroup = (group: string): DocPage[] => {
   return docPages.filter((page) => page.group === group)
@@ -575,13 +590,13 @@ export const getPageBySlug = (slug: string): DocPage | undefined => {
 
 // Slugs that have real ported article content (see src/content/<slug>.html).
 // Everything else falls back to a placeholder in DocPage.
-export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don'])
+export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop'])
 
 // Deploy-time visibility gate: only these modules appear on the homepage
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
