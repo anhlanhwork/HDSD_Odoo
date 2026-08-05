@@ -82,10 +82,14 @@ export function useFeaturePanels(
       }
       if (group === view) scopes.push(el)
     })
+    // A page with no features at all (e.g. a single-page guide, not a
+    // multi-panel module) has nothing to switch away from — its h2 section
+    // headings are never shown anywhere else, so include them as the TOC's
+    // top level instead of leaving the page without a "Trên trang này" list.
+    const flatPage = featureIds.length === 0
     const entries: TocEntry[] = []
     let anchorIdx = 0
-    const harvest = (h: Element) => {
-      const depth = h.tagName === 'H3' ? 2 : 3
+    const harvest = (h: Element, depth: 2 | 3) => {
       let id = h.id
       if (!id) {
         id = `__toc-${anchorIdx++}`
@@ -93,9 +97,14 @@ export function useFeaturePanels(
       }
       entries.push({ id, label: h.textContent?.trim() || '', depth })
     }
+    const subDepth = (tag: string): 2 | 3 => (flatPage || tag === 'H4' ? 3 : 2)
     scopes.forEach((scope) => {
-      if (scope.tagName === 'H3' || scope.tagName === 'H4') harvest(scope)
-      scope.querySelectorAll('h3, h4').forEach(harvest)
+      if (flatPage) {
+        if (scope.tagName === 'H2') harvest(scope, 2)
+        scope.querySelectorAll('h2').forEach((h) => harvest(h, 2))
+      }
+      if (scope.tagName === 'H3' || scope.tagName === 'H4') harvest(scope, subDepth(scope.tagName))
+      scope.querySelectorAll('h3, h4').forEach((h) => harvest(h, subDepth(h.tagName)))
     })
     if (!entries.length) {
       let i = 0
