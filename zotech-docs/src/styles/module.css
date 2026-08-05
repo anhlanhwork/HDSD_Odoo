@@ -22,6 +22,23 @@
 }
 .doc-shot:hover { border-color: var(--color-accent-300); }
 
+/* ---- Portrait phone screenshots: several rules above size this figure to
+        the full column width (the ".steps"/".step-content" step-context
+        overrides in particular). !important here is deliberate — it's the
+        only reliable way to guarantee this specific figure variant wins
+        over all of them regardless of which step/steps context it's in. ---- */
+.doc-shot--portrait {
+  display: block !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.doc-shot--portrait img {
+  width: auto !important;
+  max-width: min(320px, 100%) !important;
+}
+
 /* steps: tighten the figure inside a step */
 .step-content .doc-shot { margin: var(--space-3) 0; }
 .step-text { margin-bottom: var(--space-3); }
