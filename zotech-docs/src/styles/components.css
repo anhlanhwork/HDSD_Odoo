@@ -183,7 +183,37 @@
 .callout-info    { background: var(--info-50);    border-color: var(--info-200);    color: var(--info-700); }
 .callout-warn    { background: var(--warn-50);    border-color: var(--warn-200);    color: var(--warn-700); }
 .callout-success { background: var(--success-50); border-color: var(--success-200); color: var(--success-700); }
-.callout-danger  { background: var(--danger-50);  border-color: var(--danger-200);  color: var(--danger-700); }
+.callout-danger  {
+  background: var(--danger-50);
+  border-color: var(--danger-200);
+  color: var(--danger-700);
+  border-left: 4px solid var(--danger-500);
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.12);
+}
+.callout-danger .callout-title { color: var(--danger-700); }
+.callout-danger .callout-icon { color: var(--danger-500); }
+
+/* Highest-severity variant: for the rare warning that must be impossible to
+   skim past (e.g. "editing this field corrupts data"), stacked on top of
+   .callout-danger for a much larger, bolder treatment. */
+.callout-critical {
+  border-width: 2px;
+  border-left-width: 6px;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.22);
+}
+.callout-critical .callout-icon svg { width: 26px; height: 26px; }
+.callout-critical .callout-title {
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.callout-critical .callout-body p {
+  font-size: 16.5px;
+  line-height: 1.55;
+  font-weight: var(--fw-medium, 500);
+}
+.callout-critical .callout-body strong { font-weight: var(--fw-bold, 700); }
 .callout-tip     { background: var(--tip-50);     border-color: var(--tip-200);     color: var(--tip-700); }
 .callout .callout-body { color: var(--fg-default); }
 .callout .callout-body strong { color: var(--fg-strong); }

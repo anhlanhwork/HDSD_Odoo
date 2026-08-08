@@ -138,14 +138,14 @@ export const docPages: DocPage[] = [
     slug: 'kho-hang',
     title: 'Kho hàng',
     group: 'Chuỗi cung ứng',
+    // Deploy-scoped: only "Điều chuyển nội bộ kho" has been reviewed and is
+    // ready to publish. The other real features (tao-san-pham, nhap-hang-ve-kho,
+    // xuat-kho-giao-hang-cho-khach, hoan-tra-hang, kiem-ke-kho, ...) exist in the
+    // source content but are intentionally left out of both this toc and
+    // src/content/kho-hang.html until they're reviewed too — add them back to
+    // both places together when that happens.
     toc: [
-      { id: 'tao-san-pham', label: 'Tạo sản phẩm' },
-      { id: 'quan-ly-san-pham-theo-lo-se-ri-truong-hop-kho', label: 'Quản lý sản phẩm theo Lô / Sê-ri (trường hợp không quản lý sản phẩm theo Lô/Seriel thì bỏ qua)' },
-      { id: 'nhap-hang-ve-kho', label: 'Nhập hàng về kho' },
       { id: 'dieu-chuyen-noi-bo-kho', label: 'Điều chuyển nội bộ kho' },
-      { id: 'xuat-kho-giao-hang-cho-khach', label: 'Xuất kho giao hàng cho khách' },
-      { id: 'hoan-tra-hang', label: 'Hoàn trả hàng' },
-      { id: 'kiem-ke-kho', label: 'Kiểm kê kho' },
     ],
   },
   {
@@ -590,13 +590,13 @@ export const getPageBySlug = (slug: string): DocPage | undefined => {
 
 // Slugs that have real ported article content (see src/content/<slug>.html).
 // Everything else falls back to a placeholder in DocPage.
-export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop'])
+export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop', 'kho-hang'])
 
 // Deploy-time visibility gate: only these modules appear on the homepage
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
