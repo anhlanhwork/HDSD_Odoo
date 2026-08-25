@@ -124,28 +124,157 @@ export const docPages: DocPage[] = [
     slug: 'mua-hang',
     title: 'Mua hàng',
     group: 'Chuỗi cung ứng',
+    // Matches the real mua-hang.html sidebar tree exactly (confirmed via
+    // screenshot). "Cấu hình hệ thống" is a bare h2 in the source that's
+    // just a module-grid hub linking to the other sections — it isn't its
+    // own sidebar leaf in the real tree, so it's left out of toc/sidebarTree
+    // (its content still renders as part of the overview view). The
+    // "Quản lý quy trình mua hàng" / "Thanh toán đơn mua hàng" sections'
+    // text came from the legacy _src/mua-hang.js content (the new
+    // mua-hang.html design source truncates before reaching them), ported
+    // over onto the real ids/labels and paired with the new named
+    // screenshots by matching filename to described action.
     toc: [
+      { id: 'cai-dat-ung-dung', label: 'Cài đặt ứng dụng' },
+      { id: 'phan-quyen-ung-dung', label: 'Hướng dẫn phân quyền' },
+      { id: 'quy-tac-tai-cung-ung', label: 'Quy tắc Tái cung ứng sản phẩm' },
+      { id: 'don-vi-mua-hang', label: 'Thiết lập đơn vị mua hàng' },
+      { id: 'bang-gia-san-pham-ncc', label: 'Thiết lập bảng giá sản phẩm theo nhà cung cấp' },
+      { id: 'thiet-lap-nha-cung-cap', label: 'Thiết lập nhà cung cấp' },
       { id: 'yeu-cau-mua-hang', label: 'Yêu cầu mua hàng' },
-      { id: 'quan-ly-nha-cung-cap', label: 'Quản lý Nhà cung cấp' },
-      { id: 'bang-gia-nha-cung-cap', label: 'Bảng giá Nhà cung cấp' },
       { id: 'yeu-cau-bao-gia-don-hang', label: 'Yêu cầu báo giá/đơn hàng' },
       { id: 'xu-ly-don-hang', label: 'Xử lý đơn hàng' },
-      { id: 'tao-hoa-don-mua-hang-theo-doi-cong-no-ncc', label: 'Tạo hóa đơn mua hàng / Theo dõi công nợ NCC' },
       { id: 'tra-hang', label: 'Trả hàng' },
+      { id: 'tao-hoa-don-mua-hang', label: 'Tạo hóa đơn' },
+      { id: 'theo-doi-cong-no-ncc', label: 'Theo dõi công nợ NCC' },
+    ],
+    overviewExtra: ['cai-dat-ung-dung'],
+    sidebarTree: [
+      {
+        label: 'Thiết lập & cấu hình',
+        children: [
+          {
+            label: 'Cấu hình sản phẩm',
+            children: [{ id: 'quy-tac-tai-cung-ung' }, { id: 'don-vi-mua-hang' }, { id: 'bang-gia-san-pham-ncc' }],
+          },
+          { id: 'phan-quyen-ung-dung' },
+          { id: 'thiet-lap-nha-cung-cap' },
+        ],
+      },
+      {
+        label: 'Quản lý quy trình mua hàng',
+        children: [
+          { id: 'yeu-cau-mua-hang' },
+          { id: 'yeu-cau-bao-gia-don-hang' },
+          { id: 'xu-ly-don-hang' },
+          { id: 'tra-hang' },
+        ],
+      },
+      {
+        label: 'Thanh toán đơn mua hàng',
+        children: [{ id: 'tao-hoa-don-mua-hang' }, { id: 'theo-doi-cong-no-ncc' }],
+      },
     ],
   },
   {
     slug: 'kho-hang',
     title: 'Kho hàng',
     group: 'Chuỗi cung ứng',
-    // Deploy-scoped: only "Điều chuyển nội bộ kho" has been reviewed and is
-    // ready to publish. The other real features (tao-san-pham, nhap-hang-ve-kho,
-    // xuat-kho-giao-hang-cho-khach, hoan-tra-hang, kiem-ke-kho, ...) exist in the
-    // source content but are intentionally left out of both this toc and
-    // src/content/kho-hang.html until they're reviewed too — add them back to
-    // both places together when that happens.
+    // Ported from the Claude Design project's real source articles:
+    // _src/kho-article.html (the fully-written, 62-screenshot workflow
+    // version) and design_handoff_kho_hang_cau_hinh/kho_hang_cau_hinh_snippet.html
+    // (the setup/config section, split out separately since the top-level
+    // kho-hang.html file is too large for whole-file fetches). Every id
+    // below has full step-by-step content with real screenshots.
+    // "Điều chuyển nội bộ kho" keeps the pre-existing site version (more
+    // detailed — includes a Trả hàng/discrepancy-handling subsection and a
+    // video not present in the design source's shorter version of that
+    // section). 'muc-dich' / 'cau-hinh-he-thong' (overview headings) are
+    // excluded from toc, same pattern as CRM/mua-hang.
     toc: [
+      { id: 'thiet-lap-kho-hang', label: 'Kho hàng' },
+      { id: 'hoat-dong-kho', label: 'Hoạt động Kho' },
+      { id: 'cau-hinh-vi-tri-kho', label: 'Vị trí' },
+      { id: 'cau-hinh-tuyen-duong', label: 'Tuyến cung ứng' },
+      { id: 'quy-tac-kho', label: 'Quy tắc' },
+      { id: 'danh-muc-luu-kho', label: 'Danh mục lưu kho' },
+      { id: 'quy-tac-luu-kho', label: 'Quy tắc lưu kho' },
+      { id: 'danh-muc-san-pham', label: 'Danh mục sản phẩm' },
+      { id: 'thuoc-tinh', label: 'Thuộc tính' },
+      { id: 'danh-phap-ma-vach', label: 'Danh pháp mã vạch' },
+      { id: 'thiet-lap-don-vi-tinh', label: 'Danh mục đơn vị tính' },
+      { id: 'vai-tro-cong-viec', label: 'Vai trò Công việc' },
+      { id: 'phan-cong-cong-viec', label: 'Phân công Công việc' },
+      { id: 'quy-cach-kien-hang', label: 'Quy cách kiện hàng' },
+      { id: 'danh-sach-shipper', label: 'Danh sách Shipper' },
+      { id: 'phuong-thuc-giao-hang', label: 'Phương thức giao hàng' },
+      { id: 'tien-to-ma-buu-chinh', label: 'Tiền tố mã bưu chính' },
+      { id: 'tao-san-pham', label: 'Tạo sản phẩm' },
+      { id: 'quan-ly-san-pham-theo-lo-se-ri-truong-hop-kho', label: 'Quản lý sản phẩm theo Lô / Sê-ri' },
+      { id: 'nhap-hang-ve-kho', label: 'Nhập hàng về kho' },
       { id: 'dieu-chuyen-noi-bo-kho', label: 'Điều chuyển nội bộ kho' },
+      { id: 'xuat-kho-giao-hang-cho-khach', label: 'Xuất kho giao hàng cho khách' },
+      { id: 'hoan-tra-hang', label: 'Hoàn trả hàng' },
+      { id: 'kiem-ke-kho', label: 'Kiểm kê kho' },
+    ],
+    sidebarTree: [
+      {
+        label: 'Thiết lập & cấu hình',
+        children: [
+          {
+            label: 'Quản lý kho hàng',
+            children: [
+              { id: 'thiet-lap-kho-hang' },
+              { id: 'hoat-dong-kho' },
+              { id: 'cau-hinh-vi-tri-kho' },
+              { id: 'cau-hinh-tuyen-duong' },
+              { id: 'quy-tac-kho' },
+              { id: 'danh-muc-luu-kho' },
+              { id: 'quy-tac-luu-kho' },
+            ],
+          },
+          {
+            label: 'Sản phẩm',
+            children: [{ id: 'danh-muc-san-pham' }, { id: 'thuoc-tinh' }, { id: 'danh-phap-ma-vach' }],
+          },
+          {
+            label: 'Đơn vị tính',
+            children: [
+              { id: 'thiet-lap-don-vi-tinh' },
+              { id: 'vai-tro-cong-viec' },
+              { id: 'phan-cong-cong-viec' },
+              { id: 'quy-cach-kien-hang' },
+              { id: 'danh-sach-shipper' },
+            ],
+          },
+          {
+            label: 'Giao hàng',
+            children: [{ id: 'phuong-thuc-giao-hang' }, { id: 'tien-to-ma-buu-chinh' }],
+          },
+        ],
+      },
+      {
+        label: 'Quy trình và tính năng',
+        children: [
+          {
+            label: 'Sản phẩm',
+            children: [{ id: 'tao-san-pham' }, { id: 'quan-ly-san-pham-theo-lo-se-ri-truong-hop-kho' }],
+          },
+          {
+            label: 'Quy trình kho vận',
+            children: [
+              { id: 'nhap-hang-ve-kho' },
+              { id: 'dieu-chuyen-noi-bo-kho' },
+              { id: 'xuat-kho-giao-hang-cho-khach' },
+              { id: 'hoan-tra-hang' },
+            ],
+          },
+          {
+            label: 'Kiểm kê',
+            children: [{ id: 'kiem-ke-kho' }],
+          },
+        ],
+      },
     ],
   },
   {
@@ -278,6 +407,7 @@ export const docPages: DocPage[] = [
       { id: 'kho-so-luu-y-van-hanh', label: 'Lưu ý khi vận hành' },
       { id: 'quy-tac-gan-lead', label: 'Quy tắc gán KD cho Lead' },
       { id: 'tao-lien-he', label: 'Tạo liên hệ' },
+      { id: 'pos-cake-day-don-tu-dong', label: 'Kết nối Pancake và Poscake' },
       { id: 'chia-so', label: 'Chia số' },
       { id: 'cham-soc-co-hoi', label: 'Chăm sóc cơ hội' },
       { id: 'kho-so-chung', label: 'Kho số chung' },
@@ -304,8 +434,14 @@ export const docPages: DocPage[] = [
         ],
       },
       {
-        label: 'Tạo liên hệ',
-        children: [{ id: 'tao-lien-he' }, { id: 'chia-so' }, { id: 'cham-soc-co-hoi' }, { id: 'kho-so-chung' }],
+        label: 'Tạo và chăm sóc cơ hội',
+        children: [
+          { id: 'tao-lien-he' },
+          { id: 'pos-cake-day-don-tu-dong' },
+          { id: 'chia-so' },
+          { id: 'cham-soc-co-hoi' },
+          { id: 'kho-so-chung' },
+        ],
       },
       {
         label: 'Tính năng mở rộng',
@@ -371,6 +507,8 @@ export const docPages: DocPage[] = [
       { id: 'cap-nhat-chi-tiet-don-section', label: 'Cập nhật chi tiết đơn Ecom' },
       { id: 'danh-sach-khach-hang', label: 'Đồng bộ danh sách khách hàng' },
       { id: 'tao-don-noi-bo', label: 'Tạo đơn nội bộ từ đơn Ecom' },
+      { id: 'bang-ke-quyet-toan', label: 'Bảng kê quyết toán' },
+      { id: 'giao-dich-phi-san', label: 'Giao dịch phí sàn' },
     ],
     sidebarTree: [
       {
@@ -402,6 +540,11 @@ export const docPages: DocPage[] = [
               { id: 'danh-sach-khach-hang' },
               { id: 'tao-don-noi-bo' },
             ],
+          },
+          // Matches the real sidebar's "Dữ liệu đối soát sàn TMĐT" subgroup.
+          {
+            label: 'Dữ liệu đối soát sàn TMĐT',
+            children: [{ id: 'bang-ke-quyet-toan' }, { id: 'giao-dich-phi-san' }],
           },
         ],
       },
@@ -590,13 +733,13 @@ export const getPageBySlug = (slug: string): DocPage | undefined => {
 
 // Slugs that have real ported article content (see src/content/<slug>.html).
 // Everything else falls back to a placeholder in DocPage.
-export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop', 'kho-hang'])
+export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop', 'kho-hang', 'mua-hang'])
 
 // Deploy-time visibility gate: only these modules appear on the homepage
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
