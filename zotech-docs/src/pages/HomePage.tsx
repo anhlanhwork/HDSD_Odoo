@@ -23,7 +23,7 @@ export const HomePage: React.FC = () => {
         <div className="idx-head">
           <h1>Tài liệu hướng dẫn sử dụng</h1>
           <p className="idx-lede">
-            Khám phá hướng dẫn sử dụng và cấu hình cho từng phân hệ nghiệp vụ trên hệ thống Zotech — nền Odoo 19.0.
+            Khám phá hướng dẫn sử dụng và cấu hình cho từng phân hệ nghiệp vụ trên hệ thống Zotech — nền Odoo 18.0.
           </p>
         </div>
 

@@ -18,7 +18,7 @@ export const SubBar: React.FC = () => {
         </button>
         <div className="subbar-divider" />
         <button type="button" className="subbar-select" title="Phiên bản tài liệu">
-          <span>Odoo 19.0</span>
+          <span>Odoo 18.0</span>
           <Chevron />
         </button>
       </div>

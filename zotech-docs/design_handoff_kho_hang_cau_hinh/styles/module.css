@@ -1,0 +1,144 @@
+/* =========================================================
+   MODULE PAGE — styles for data-driven guide pages
+   (real screenshots, generic tables, step bodies)
+   ========================================================= */
+
+/* ---- real screenshot figure ---- */
+.doc-shot {
+  margin: var(--space-5) 0;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+  max-width: 100%;
+}
+.doc-shot a { display: block; line-height: 0; }
+.doc-shot img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: var(--bg-elevated);
+}
+.doc-shot:hover { border-color: var(--color-accent-300); }
+
+/* steps: tighten the figure inside a step */
+.step-content .doc-shot { margin: var(--space-3) 0; }
+.step-text { margin-bottom: var(--space-3); }
+.step-text:last-child { margin-bottom: 0; }
+.step-text code { white-space: normal; }
+
+/* ---- h4 sub-subsection ---- */
+.doc-h4 {
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
+  font-weight: var(--fw-semibold);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  scroll-margin-top: 80px;
+  color: var(--fg-strong);
+}
+
+/* ---- generic table: first column as label token ---- */
+.table td.table-firstcol {
+  font-weight: var(--fw-medium);
+  color: var(--fg-strong);
+  white-space: normal;
+  min-width: 150px;
+}
+.table td.table-firstcol code { font-size: 12.5px; }
+
+/* ---- requirement/diễn-giải table: balanced columns + clean field labels ---- */
+.article .table { table-layout: fixed; }
+.article .table th:first-child,
+.article .table td:first-child { width: 30%; }
+.article .table th:last-child,
+.article .table td:last-child  { width: 70%; }
+/* 3-column tables (Trường / Diễn giải / Ghi chú) — override the 2-col split
+   so the middle column isn't crushed to 0 */
+.article .table.table-3col th:first-child,
+.article .table.table-3col td:first-child { width: 24%; }
+.article .table.table-3col th:nth-child(2),
+.article .table.table-3col td:nth-child(2) { width: 52%; }
+.article .table.table-3col th:last-child,
+.article .table.table-3col td:last-child { width: 24%; }
+/* field-name token: readable sans label instead of cramped mono, dot stays glued */
+.article .table-field {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: var(--fg-strong);
+  letter-spacing: 0;
+  white-space: normal;
+}
+.article .table-required { margin-left: 5px; }
+/* tighten in-cell bullet lists so tall rows read cleaner */
+.article .table td ul { margin: 0; padding-left: 18px; }
+.article .table td li { margin-bottom: var(--space-1); }
+.article .table td li:last-child { margin-bottom: 0; }
+.article .table td p { margin-bottom: var(--space-2); }
+@media (max-width: 720px) {
+  .article .table th:first-child,
+  .article .table td:first-child { width: 38%; }
+  .article .table th:last-child,
+  .article .table td:last-child  { width: 62%; }
+}
+
+/* note callout list spacing */
+.callout .callout-body ul { margin: var(--space-2) 0 0; padding-left: var(--space-5); }
+.callout .callout-body li { margin-bottom: var(--space-1); }
+
+/* inline code wrapping for long menu paths */
+.article code { word-break: break-word; }
+
+/* ---- overview / purpose card ---- */
+.overview-card {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  margin: var(--space-5) 0 var(--space-7);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-accent-50);
+  border: 1px solid var(--color-accent-100);
+  border-radius: var(--radius-lg);
+}
+.overview-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  color: var(--color-accent-600);
+  border: 1px solid var(--color-accent-200);
+}
+.overview-label {
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-700);
+  margin-bottom: 6px;
+}
+.overview-text {
+  font-size: 15.5px;
+  line-height: 25px;
+  color: var(--fg-strong);
+  margin: 0;
+  text-wrap: pretty;
+}
+.overview-list { margin: 0; padding-left: var(--space-4); }
+.overview-list li {
+  font-size: 14.5px;
+  line-height: 23px;
+  color: var(--fg-strong);
+  margin-bottom: 4px;
+}
+.overview-list li:last-child { margin-bottom: 0; }
+.overview-list li::marker { color: var(--color-accent-400); }
+
+/* "Mục đích" intro paragraph that's just a bold label sits closer to its list */
+.article p + ul { margin-top: calc(-1 * var(--space-2)); }
+
+/* section view: first heading sits close under the page meta (no huge gap) */
+.article-meta + h2 { margin-top: var(--space-2); }
+.article-meta + h2.h-anchored { margin-top: var(--space-2); }

@@ -589,15 +589,13 @@ export const docPages: DocPage[] = [
     group: 'Nhân sự',
     toc: [
       { id: 'cau-hinh', label: 'Cấu hình' },
-      { id: 'chuc-vu-la-nhung-cong-viec-nhiem-vu-gan-voi-c', label: 'Chức vụ' },
-      { id: 'cau-hinh-file-hop-dong-duoc-dung-de-thiet-lap', label: 'Cấu hình File hợp đồng' },
-      { id: 'quy-trinh-tao-va-xu-ly-thong-tin-01-nhan-su-m', label: 'Quy trình tạo và xử lý thông tin 01 nhân sự mới' },
+      { id: 'tao-ho-so-va-hop-dong', label: 'Tạo & xử lý nhân sự mới' },
       { id: 'cap-nhat-hop-dong', label: 'Cập nhật hợp đồng' },
       { id: 'yeu-cau-cap-phat-tk-erp', label: 'Yêu cầu cấp phát TK ERP' },
       { id: 'de-xuat-tang-luong', label: 'Đề xuất tăng lương' },
-      { id: 'quy-trinh-tao-va-xu-ly-phieu-thuyen-chuyen-bo', label: 'Quy trình tạo và xử lý phiếu thuyên chuyển bổ nhiệm' },
+      { id: 'thuyen-chuyen-bo-nhiem', label: 'Thuyên chuyển bổ nhiệm' },
       { id: 'lich-su-nguoi-quan-ly', label: 'Lịch sử người quản lý' },
-      { id: 'cac-thong-tin-can-luu-y', label: 'Các thông tin cần lưu ý' },
+      { id: 'trang-thai-can-luu-y', label: 'Trạng thái cần lưu ý' },
     ],
   },
   {
@@ -607,7 +605,7 @@ export const docPages: DocPage[] = [
     toc: [
       { id: 'ke-hoach-tich-luy', label: 'Kế hoạch tích luỹ' },
       { id: 'phieu-xin-nghi-phep', label: 'Phiếu xin nghỉ phép' },
-      { id: 'dieu-kien-de-duoc-xin-nghi-phep-nghi-co-luong', label: 'Điều kiện để được xin nghỉ phép' },
+      { id: 'dieu-kien-de-duoc-xin-nghi-phep-nghi-co-luong', label: 'Điều kiện xin nghỉ phép' },
       { id: 'yeu-cau-cap-phat-phep', label: 'Yêu cầu cấp phát phép' },
     ],
   },
@@ -638,13 +636,9 @@ export const docPages: DocPage[] = [
     title: 'Tuyển dụng',
     group: 'Nhân sự',
     toc: [
-      { id: 'hieu-suat-san', label: 'Hiệu suất sàn' },
-      { id: 'doanh-so-du-kien', label: 'Doanh số dự kiến' },
-      { id: 'dinh-bien-nhan-su', label: 'Định biên nhân sự' },
-      { id: 'yeu-cau-tuyen-dung', label: 'Yêu cầu tuyển dụng' },
+      { id: 'cau-hinh', label: 'Cấu hình' },
       { id: 'ke-hoach-tuyen-dung', label: 'Kế hoạch tuyển dụng' },
-      { id: 'chi-phi-tuyen-dung', label: 'Chi phí tuyển dụng' },
-      { id: 'quy-trinh-tao-va-xu-ly-ho-so-ung-vien', label: 'Quy trình tạo và xử lý hồ sơ ứng viên' },
+      { id: 'xu-ly-ho-so-ung-vien', label: 'Xử lý hồ sơ ứng viên' },
     ],
   },
   {
@@ -654,18 +648,24 @@ export const docPages: DocPage[] = [
     toc: [
       { id: 'cau-hinh', label: 'Cấu hình' },
       { id: 'khoa-hoc', label: 'Khoá học' },
-      { id: 'hoc-vien-tham-gia-khoa-hoc', label: 'Học viên tham gia khoá học' },
+      { id: 'hoc-vien-tham-gia', label: 'Học viên tham gia khoá học' },
     ],
   },
   {
     slug: 'bang-luong',
     title: 'Bảng lương',
     group: 'Nhân sự',
+    // Matches the real bang-luong.html h2 ids exactly — the source has no
+    // standalone "Cấu hình" section (it's a module-grid hub only, same
+    // pattern as cham-cong/nghi-phep), and adds two sections
+    // ('thay-doi-ty-le', 'thay-doi-co-so') not yet in the older manifest.
     toc: [
       { id: 'phu-cap-hop-dong', label: 'Phụ cấp hợp đồng' },
-      { id: 'kieu-dong-gop-tu-luong', label: 'Kiểu đóng góp từ lương' },
+      { id: 'kieu-dong-gop', label: 'Kiểu đóng góp từ lương' },
       { id: 'dang-ky-dong-gop', label: 'Đăng ký đóng góp' },
-      { id: 'kiem-tra-phieu-luong', label: 'Kiểm tra Phiếu lương' },
+      { id: 'thay-doi-ty-le', label: 'Thay đổi tỷ lệ đóng góp' },
+      { id: 'thay-doi-co-so', label: 'Thay đổi cơ sở tính toán' },
+      { id: 'kiem-tra-phieu-luong', label: 'Kiểm tra phiếu lương' },
     ],
   },
 
@@ -717,7 +717,7 @@ export const docPages: DocPage[] = [
 ]
 
 // Category order as it appears in the source sidebar/homepage.
-export const GROUP_ORDER = ['Tài khoản & Bảo mật', 'Kế toán', 'Chuỗi cung ứng', 'Bán hàng & Khách hàng', 'Nhân sự', 'Vận hành']
+export const GROUP_ORDER = ['Tài khoản & Bảo mật', 'Nhân sự', 'Kế toán', 'Chuỗi cung ứng', 'Bán hàng & Khách hàng', 'Vận hành']
 
 export const getPagesByGroup = (group: string): DocPage[] => {
   return docPages.filter((page) => page.group === group)
@@ -739,7 +739,7 @@ export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang', 'nhan-vien', 'nghi-phep', 'tang-ca', 'cham-cong', 'tuyen-dung', 'elearning', 'bang-luong'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
@@ -777,15 +777,26 @@ export const getSidebarTree = (page: DocPage): RenderedSidebarNode[] => {
       ...(page.overviewExtra ?? []).map((id) => ({ kind: 'leaf' as const, id, label: byId.get(id) ?? id })),
     ],
   }
+  // Nhân sự modules skip the "Giới thiệu hệ thống" group — their overview
+  // content lives directly in the page's lede, so the sidebar goes
+  // straight to the feature list.
+  const isNhanSu = page.group === 'Nhân sự'
+  const prefix = isNhanSu ? [] : [overview]
   if (page.sidebarTree?.length) {
-    return [overview, ...page.sidebarTree.map((n) => resolveSidebarNode(n, byId))]
+    return [...prefix, ...page.sidebarTree.map((n) => resolveSidebarNode(n, byId))]
+  }
+  const featureLeaves: RenderedSidebarNode[] = page.toc.map((t) => ({ kind: 'leaf' as const, id: t.id, label: t.label }))
+  // Nhân sự modules also skip the "Các tính năng & quy trình" wrapper —
+  // its feature ids are listed as plain top-level links instead.
+  if (isNhanSu) {
+    return [...prefix, ...featureLeaves]
   }
   return [
-    overview,
+    ...prefix,
     {
       kind: 'group',
       label: 'Các tính năng & quy trình',
-      children: page.toc.map((t) => ({ kind: 'leaf' as const, id: t.id, label: t.label })),
+      children: featureLeaves,
     },
   ]
 }

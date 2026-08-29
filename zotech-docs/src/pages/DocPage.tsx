@@ -15,6 +15,14 @@ import ecommerceHtml from '../content/ecommerce.html?raw'
 import hoaDonHtml from '../content/hoa-don.html?raw'
 import batXacThuc2LopHtml from '../content/bat-xac-thuc-2-lop.html?raw'
 import khoHangHtml from '../content/kho-hang.html?raw'
+import muaHangHtml from '../content/mua-hang.html?raw'
+import nhanVienHtml from '../content/nhan-vien.html?raw'
+import nghiPhepHtml from '../content/nghi-phep.html?raw'
+import chamCongHtml from '../content/cham-cong.html?raw'
+import tangCaHtml from '../content/tang-ca.html?raw'
+import tuyenDungHtml from '../content/tuyen-dung.html?raw'
+import elearningHtml from '../content/elearning.html?raw'
+import bangLuongHtml from '../content/bang-luong.html?raw'
 
 const CONTENT_MAP: Record<string, string> = {
   crm: crmHtml,
@@ -23,6 +31,14 @@ const CONTENT_MAP: Record<string, string> = {
   'hoa-don': hoaDonHtml,
   'bat-xac-thuc-2-lop': batXacThuc2LopHtml,
   'kho-hang': khoHangHtml,
+  'mua-hang': muaHangHtml,
+  'nhan-vien': nhanVienHtml,
+  'nghi-phep': nghiPhepHtml,
+  'cham-cong': chamCongHtml,
+  'tang-ca': tangCaHtml,
+  'tuyen-dung': tuyenDungHtml,
+  'elearning': elearningHtml,
+  'bang-luong': bangLuongHtml,
 }
 
 export const DocPage: React.FC = () => {

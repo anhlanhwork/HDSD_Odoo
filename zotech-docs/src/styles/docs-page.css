@@ -159,6 +159,11 @@
 /* hide the breadcrumb on article pages; pull the title up */
 .article-toolbar .crumbs { display: none; }
 .shell .shell-main { padding-top: var(--space-5); }
+/* Ensures short trailing sections (few/no images) can still scroll their
+   heading up to the TOC scroll-spy trigger line — without this, a page
+   whose last heading never reaches that line leaves the TOC highlight
+   stuck on an earlier item even though the click did scroll correctly. */
+.shell .shell-main { padding-bottom: 70vh; }
 .article-toolbar { margin-bottom: var(--space-4); }
 
 /* body text aligns to the full content column, like the other blocks/screens */
@@ -179,10 +184,11 @@
   height: auto;
   image-rendering: auto;
 }
-/* ---- Step screenshots: fill the column so every step image renders at the
-        same display width (they are all hi-res captures, so no blur). ---- */
+/* ---- Step screenshots: never upscale past natural size (hi-res captures
+        already exceed the column width, so max-width:100% still fills it;
+        low-res captures now render sharp instead of blurry). ---- */
 .steps .doc-shot { display: block; width: 100%; }
-.steps .doc-shot img { width: 100%; }
+.steps .doc-shot img { width: auto; max-width: 100%; height: auto; }
 /* ---- Side-by-side screenshots (multi-step illustration) ---- */
 .doc-shot-grid {
   display: flex;
@@ -196,7 +202,7 @@
   flex: 1 1 240px;
   min-width: 0;
 }
-.doc-shot-grid .doc-shot img { width: 100%; }
+.doc-shot-grid .doc-shot img { width: auto; max-width: 100%; height: auto; }
 
 /* ---- Image lightbox ---- */
 .lightbox {
@@ -297,14 +303,14 @@
 .submod-card-body { display: block; min-width: 0; }
 .submod-card-row { display: block; }
 .submod-card-title {
-  font-size: 16px;
-  font-weight: var(--fw-semibold);
-  color: var(--color-accent-600);
+  font-size: 15px;
+  font-weight: var(--fw-regular);
+  color: var(--fg-strong);
   line-height: 24px;
   transition: color var(--dur-fast) var(--ease-out);
 }
 .submod-card:hover .submod-card-title {
-  color: var(--color-accent-800);
+  color: var(--color-accent-700);
   text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;
 }
 .submod-card-desc {
@@ -444,3 +450,21 @@
 
 /* --- status badge pop --- */
 .yc-doc .badge-info { font-weight: var(--fw-semibold); }
+
+
+/* WMS swimlane */
+.wms{--w-line:var(--border-strong);border:1px solid var(--border-default);border-radius:var(--radius-lg);background:var(--bg-surface);overflow:hidden;margin:var(--space-5) 0 var(--space-6);box-shadow:var(--shadow-sm);font-family:var(--font-sans)}.wms-title{display:flex;align-items:center;gap:10px;padding:13px 20px;font-size:15px;font-weight:var(--fw-semibold);color:var(--fg-strong);background:var(--bg-page);border-bottom:1px solid var(--border-default)}.wms-title-dot{width:8px;height:8px;border-radius:var(--radius-pill);background:var(--color-accent-500)}.wms-lane{display:grid;grid-template-columns:118px 1fr;border-bottom:1px solid var(--border-subtle)}.wms-lane:last-child{border-bottom:none}.wms-lane-label{display:flex;align-items:center;justify-content:center;text-align:center;padding:14px 12px;font-size:12.5px;font-weight:var(--fw-semibold);color:var(--fg-muted);letter-spacing:.01em;background:var(--bg-page);border-right:1px solid var(--border-subtle)}.wms-lane-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}.wms-row{display:flex;align-items:stretch;flex-wrap:wrap;gap:10px}.wms-step{flex:1 1 158px;min-width:152px;display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:var(--radius-md);border:1px solid var(--wstep-bd,var(--border-default));background:var(--wstep-bg,var(--bg-page))}.wms-num{flex:none;width:21px;height:21px;border-radius:var(--radius-pill);display:grid;place-items:center;font-size:11.5px;font-weight:var(--fw-bold);color:#fff;background:var(--wstep-ac,var(--fg-muted));margin-top:1px}.wms-step-title{font-size:13.5px;font-weight:var(--fw-semibold);color:var(--wstep-tx,var(--fg-strong));line-height:18px}.wms-step-sub{font-size:11.5px;line-height:16px;color:var(--fg-muted);margin-top:2px;text-wrap:pretty}.wms-conn{flex:none;align-self:center;display:flex;align-items:center;color:var(--fg-subtle)}.wms-step.is-blue{--wstep-bg:var(--color-accent-50);--wstep-bd:var(--color-accent-200);--wstep-ac:var(--color-accent-500);--wstep-tx:var(--color-accent-700)}.wms-step.is-green{--wstep-bg:#f0fdf4;--wstep-bd:#bbf7d0;--wstep-ac:#16a34a;--wstep-tx:#15803d}.wms-step.is-red{--wstep-bg:#fef2f2;--wstep-bd:#fecaca;--wstep-ac:#ef4444;--wstep-tx:#b91c1c}.wms-step.is-warn{--wstep-bg:#fffbeb;--wstep-bd:#fde68a;--wstep-ac:#d97706;--wstep-tx:#92400e}.wms-branch{margin-top:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 13px;border:1px dashed #fca5a5;border-radius:var(--radius-md);background:rgba(255,242,242,.55)}.wms-branch-lead{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:var(--fw-bold);color:#b91c1c;text-transform:uppercase;letter-spacing:.04em}.wms-flowdown{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 0;color:var(--fg-subtle);font-size:11.5px;font-weight:var(--fw-medium)}.wms-foot{display:flex;justify-content:center;padding:14px 20px 18px;background:var(--bg-page);border-top:1px solid var(--border-subtle)}.wms-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:var(--radius-pill);background:#f0fdf4;border:1px solid #86efac;font-size:13px;font-weight:var(--fw-semibold);color:#15803d}@media(max-width:640px){.wms-lane{grid-template-columns:1fr}.wms-lane-label{border-right:none;border-bottom:1px solid var(--border-subtle);justify-content:flex-start}.wms-conn{display:none}.wms-step{flex:1 1 100%}}
+
+/* single-column list variant of the feature directory grid */
+.submod-grid.is-list {
+  grid-template-columns: 1fr;
+  row-gap: var(--space-3);
+}
+.submod-grid.is-list .submod-card {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.submod-grid.is-list .submod-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}

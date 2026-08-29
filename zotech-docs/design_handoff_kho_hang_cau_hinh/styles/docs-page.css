@@ -1,0 +1,632 @@
+/* =========================================================
+   PAGE EXTRAS — lightbox + small docs-page niceties
+   (kept separate so the core design-system CSS is untouched)
+   ========================================================= */
+
+/* Empty-state placeholder for sections still to be written */
+.doc-placeholder {
+  margin: var(--space-6) 0 var(--space-8);
+  padding: var(--space-9) var(--space-7);
+  text-align: center;
+  border: 1.5px dashed var(--color-accent-300);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(120% 120% at 50% 0%, var(--color-accent-50) 0%, rgba(255,247,237,0) 70%),
+    var(--bg-surface);
+}
+.doc-placeholder-icon {
+  width: 56px; height: 56px;
+  margin: 0 auto var(--space-4);
+  display: grid; place-items: center;
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-100);
+  color: var(--color-accent-600);
+}
+.doc-placeholder-title {
+  font-size: 17px;
+  font-weight: var(--fw-bold);
+  color: var(--fg-strong);
+  margin-bottom: var(--space-2);
+}
+.doc-placeholder p {
+  max-width: 46ch;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fg-muted);
+}
+
+/* ---- Full-bleed like Odoo docs: shell + bars span the full window,
+        sidebar sits flush to the left edge, no centered max-width ---- */
+.shell,
+.topnav-inner,
+.subbar-inner { max-width: none; }
+
+.article { max-width: none; }          /* article fills its grid column */
+
+/* swimlane flow diagram (Sơ đồ tổng quan) */
+.flow-diagram {
+  margin: var(--space-4) 0 var(--space-8);
+  padding: var(--space-5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  overflow-x: auto;
+}
+.flow-diagram svg { display: block; width: 100%; min-width: 720px; height: auto; }
+
+/* swimlane variant rendered inside the design-system Process-diagram card */
+.proc-diagram-scroll { padding: var(--space-6) var(--space-5); background: var(--bg-page); overflow-x: auto; }
+.proc-diagram-scroll svg { display: block; width: 100%; min-width: 940px; height: auto; }
+.proc-diagram + .proc-diagram { margin-top: var(--space-5); }
+.flow-swimlane { padding: 0; background: #fff; }
+.flow-swimlane svg { min-width: 960px; }
+
+/* =========================================================
+   Process diagram — Linear horizontal flow
+   ========================================================= */
+.proc-diagram {
+  margin: var(--space-4) 0 var(--space-8);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+.proc-diagram-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.proc-diagram-title {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-muted);
+}
+.proc-diagram-tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  color: var(--color-accent-700);
+  background: var(--color-accent-50);
+  border: 1px solid var(--color-accent-200);
+  border-radius: var(--radius-md);
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+.proc-diagram-body {
+  padding: var(--space-7) var(--space-6);
+  background: var(--bg-page);
+}
+.proc-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-2);
+}
+.proc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 12px 18px;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-strong);
+  white-space: nowrap;
+}
+.proc-chip svg { flex: none; color: var(--color-accent-500); }
+.proc-chip.is-accent {
+  background: var(--color-accent-50);
+  border-color: var(--color-accent-300);
+  color: var(--color-accent-800);
+}
+.proc-chip.is-accent svg { color: var(--color-accent-600); }
+.proc-arrow {
+  flex: none;
+  display: inline-flex;
+  color: var(--color-accent-500);
+}
+.proc-arrow.is-wrap { width: 100%; height: 0; }   /* arrow that starts a new wrapped row */
+@media (max-width: 560px) {
+  .proc-flow { flex-direction: column; align-items: stretch; }
+  .proc-chip { justify-content: flex-start; }
+  .proc-arrow { transform: rotate(90deg); align-self: center; }
+}
+
+/* purchase-process rendered with the design-system Steps component */
+.steps .step-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.steps .step-title .badge { font-weight: var(--fw-semibold); }
+.steps .step-note {
+  font-size: 13px;
+  color: var(--fg-muted);
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.steps .step-note svg { flex: none; color: var(--color-accent-500); }
+
+.shell .shell-main { padding-top: var(--space-5); }
+.article-toolbar { margin-bottom: var(--space-4); }
+
+/* body text aligns to the full content column, like the other blocks/screens */
+.article > p,
+.step-text,
+.overview-body { max-width: none; text-align: justify; text-justify: inter-word; }
+.article-lede { max-width: none; }
+
+/* ---- Screenshots: never upscale (was width:100% → blurry on the wide column).
+        Render at natural size, cap at column width, frame hugs the image. ---- */
+.doc-shot {
+  display: table;          /* shrink-wrap the border to the image */
+  max-width: 100%;
+}
+.doc-shot img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  image-rendering: auto;
+}
+/* ---- Step screenshots: fill the column so every step image renders at the
+        same display width (they are all hi-res captures, so no blur). ---- */
+.steps .doc-shot { display: block; width: 100%; }
+.steps .doc-shot img { width: 100%; }
+/* ---- Side-by-side screenshots (multi-step illustration) ---- */
+.doc-shot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin: var(--space-4) 0;
+}
+.doc-shot-grid .doc-shot {
+  margin: 0;
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.doc-shot-grid .doc-shot img { width: 100%; }
+.doc-shot-grid.is-equal-h .doc-shot { display: flex; }
+.doc-shot-grid.is-equal-h .doc-shot a {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 260px; background: var(--bg-subtle, #f5f5f5);
+}
+.doc-shot-grid.is-equal-h .doc-shot img { width: auto; height: 100%; max-width: 100%; object-fit: contain; }
+
+/* ---- Image lightbox ---- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-9);
+  background: rgba(12, 10, 9, 0.78);
+  backdrop-filter: blur(4px);
+  cursor: zoom-out;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-7);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
+
+/* ---- doc screenshot affordance: show it's zoomable ---- */
+.doc-shot a { cursor: zoom-in; }
+
+/* ---- diagram wraps cleanly on smaller widths ---- */
+@media (max-width: 900px) {
+  .diagram-row { gap: var(--space-2); }
+}
+
+/* =========================================================
+   SUB-MODULE INDEX — "Các phân hệ trong Mua hàng"
+   A card grid that jumps to each in-page section.
+   ========================================================= */
+.submod-section {
+  margin: var(--space-8) 0 var(--space-9);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--border-subtle);
+}
+.submod-head { margin-bottom: var(--space-6); }
+.submod-head-label {
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-700);
+  margin-bottom: var(--space-2);
+}
+.submod-head-title { margin: 0 0 var(--space-3); }
+.submod-head-sub {
+  font-size: 15px;
+  line-height: 25px;
+  color: var(--fg-muted);
+  max-width: none;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Module overview: feature list as a multi-column directory (Viindoo-style) */
+.submod-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--space-8);
+  row-gap: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-subtle);
+}
+@media (max-width: 1100px) { .submod-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px)  { .submod-grid { grid-template-columns: 1fr; } }
+
+.submod-card {
+  display: block;
+  padding: 0;
+  background: none; border: none; border-radius: 0;
+  box-shadow: none; transform: none; text-decoration: none;
+  min-width: 0;
+}
+.submod-card:hover { background: none; border: none; box-shadow: none; transform: none; }
+.submod-card-icon,
+.submod-card-num { display: none; }
+.submod-card-body { display: block; min-width: 0; }
+.submod-card-row { display: block; }
+.submod-card-title {
+  font-size: 16px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-accent-600);
+  line-height: 24px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.submod-card:hover .submod-card-title {
+  color: var(--color-accent-800);
+  text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px;
+}
+.submod-card-desc {
+  font-size: 13.5px;
+  line-height: 20px;
+  color: var(--fg-muted);
+  margin-top: 3px;
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   FEATURE VIEW — back bar shown when one phân hệ is open
+   ========================================================= */
+.feature-back {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.feature-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 7px 13px 7px 11px;
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: var(--color-accent-700);
+  background: var(--color-accent-50);
+  border: 1px solid var(--color-accent-200);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.feature-back-btn:hover {
+  background: var(--color-accent-100);
+  border-color: var(--color-accent-300);
+}
+.feature-back-sep { color: var(--fg-subtle); font-size: 13px; }
+.feature-back-current {
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  color: var(--fg-strong);
+}
+
+/* =========================================================
+   "Yêu cầu mua hàng" screen — elevated editorial treatment
+   (scoped to .yc-doc so the rest of the docs stay untouched)
+   ========================================================= */
+.yc-doc { --yc-ink: var(--color-accent-700); }
+
+/* --- feature title styled like the overview <h1> (big + accent) --- */
+.yc-doc > h2 {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.02em;
+  color: var(--color-accent-800);
+}
+.yc-lede-text { margin-bottom: var(--space-8); }
+.yc-lede-text strong { color: var(--color-accent-800); font-weight: var(--fw-semibold); }
+
+/* --- tab subheadings --- */
+.yc-doc h4 {
+  margin: var(--space-6) 0 var(--space-3);
+  font-size: var(--fs-h4);
+  color: var(--color-accent-800);
+}
+/* --- step rhythm --- */
+.yc-doc > h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-700);
+  margin: var(--space-8) 0 var(--space-5);
+}
+.yc-doc > h3::after {
+  content: "";
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--color-accent-200), transparent);
+}
+/* overview section headers — match the feature-page section dividers
+   (uppercase accent label + gradient rule) */
+.article > h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: var(--fw-semibold);
+  color: var(--color-accent-700);
+  margin: var(--space-8) 0 var(--space-5);
+}
+.article > h2::after {
+  content: "";
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--color-accent-200), transparent);
+}
+.yc-doc .step-num {
+  background: linear-gradient(150deg, var(--color-accent-500), var(--color-accent-700));
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 10px -3px var(--color-accent-300);
+}
+.yc-doc .step-title {
+  font-size: 17px;
+  font-weight: var(--fw-bold);
+  color: var(--fg-strong);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-2);
+}
+.yc-doc .step-content > p code {
+  font-weight: var(--fw-semibold);
+}
+
+/* --- table: accent header + zebra + clean labels --- */
+.yc-doc .table-wrap {
+  border-color: var(--color-accent-200);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.yc-doc .table thead th {
+  background: linear-gradient(180deg, var(--color-accent-600), var(--color-accent-700));
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 12px;
+  font-weight: var(--fw-bold);
+  border-bottom: none;
+}
+.yc-doc .table thead th:first-child { border-top-left-radius: 0; }
+.yc-doc .table tbody tr:nth-child(even) { background: color-mix(in srgb, var(--color-accent-50) 55%, transparent); }
+.yc-doc .table tbody tr:hover { background: var(--color-accent-50); }
+.yc-doc .table-field { color: var(--color-accent-800); }
+.yc-doc .table td strong { color: var(--color-accent-800); }
+/* in-table category header rows */
+.yc-doc .table tr.table-group td {
+  background: color-mix(in srgb, var(--color-accent-100) 70%, transparent);
+  color: var(--color-accent-800);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-top: 1px solid var(--color-accent-200);
+}
+.yc-doc .table tr.table-group:first-child td { border-top: 0; }
+.yc-doc .table tr.table-group:hover td { background: color-mix(in srgb, var(--color-accent-100) 70%, transparent); }
+
+/* --- status badge pop --- */
+.yc-doc .badge-info { font-weight: var(--fw-semibold); }
+
+/* =========================================================
+   Freight-Forwarder swimlane flow (ffx-)
+   ========================================================= */
+.ffx-card { margin: var(--space-4) 0 var(--space-8); }
+.ffx-body {
+  --ffx-maxw: 720px;
+  padding: var(--space-7) var(--space-6);
+  background: var(--bg-page);
+}
+.ffx-lanes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  max-width: var(--ffx-maxw);
+  margin: 0 auto var(--space-2);
+}
+.ffx-lanes-2 { margin-top: var(--space-3); }
+.ffx-h {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  text-align: center;
+}
+.ffx-phase {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: var(--ffx-maxw);
+  margin: var(--space-5) auto var(--space-3);
+}
+.ffx-phase:first-of-type { margin-top: 0; }
+.ffx-phase-n {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 22px; height: 22px;
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+.ffx-phase-l {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  font-weight: var(--fw-semibold);
+}
+.ffx-phase::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+.ffx-band {
+  display: grid;
+  max-width: var(--ffx-maxw);
+  margin: 0 auto;
+}
+.ffx-split { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.ffx-aside-row { grid-template-columns: 1fr; position: relative; }
+/* filled step box — matches the reference template (centred, two lines, no icon) */
+.ffx-n {
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ffx-box-t { font-size: var(--fs-body); font-weight: var(--fw-bold); color: var(--fg-strong); line-height: 1.35; }
+.ffx-box-s { font-size: var(--fs-caption); color: var(--fg-muted); line-height: 1.45; }
+.ffx-purple { background:#faf5ff; border-color: var(--tip-200); }
+.ffx-purple .ffx-box-t { color: var(--tip-700); }
+.ffx-purple .ffx-box-s { color: var(--tip-500); }
+.ffx-green  { background: var(--success-50); border-color: var(--success-200); }
+.ffx-green .ffx-box-t { color: var(--success-700); }
+.ffx-green .ffx-box-s { color: var(--success-700); opacity: .8; }
+.ffx-orange { background: var(--color-accent-50); border-color: var(--color-accent-200); }
+.ffx-orange .ffx-box-t { color: var(--color-accent-800); }
+.ffx-orange .ffx-box-s { color: var(--color-accent-700); opacity: .85; }
+.ffx-red    { background: var(--danger-50); border-color: var(--danger-200); }
+.ffx-red .ffx-box-t { color: var(--danger-700); }
+.ffx-red .ffx-box-s { color: var(--danger-700); opacity: .8; }
+.ffx-neutral { background: var(--color-neutral-100); border-color: var(--border-strong); }
+/* branch labels above a split */
+.ffx-branch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  max-width: var(--ffx-maxw);
+  margin: var(--space-3) auto 0;
+}
+.ffx-bl {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  letter-spacing: .04em;
+  color: var(--fg-muted);
+  text-align: center;
+  position: relative;
+  padding-bottom: var(--space-3);
+}
+.ffx-bl::after { content:""; position:absolute; left:50%; bottom:0; width:1.5px; height:var(--space-3); background:var(--border-strong); }
+/* down connector — vertical line + chevron */
+.ffx-down {
+  width: 0; height: var(--space-6);
+  margin: var(--space-1) auto;
+  border-left: 1.5px solid var(--border-strong);
+  position: relative;
+}
+.ffx-down::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -1px;
+  width: 7px; height: 7px;
+  border-right: 1.5px solid var(--border-strong);
+  border-bottom: 1.5px solid var(--border-strong);
+  transform: translateX(-50%) rotate(45deg);
+}
+/* tracking aside */
+.ffx-aside-row { display: grid; grid-template-columns: 1fr 220px; gap: var(--space-4); align-items: center; }
+.ffx-aside {
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--bg-page);
+  padding: var(--space-3) var(--space-4);
+}
+.ffx-aside-t { font-size: var(--fs-caption); font-weight: var(--fw-semibold); color: var(--fg-subtle); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+.ffx-aside-list { list-style: none; margin: 0; padding: 0; }
+.ffx-aside-list li { font-size: var(--fs-small); color: var(--fg-muted); padding: 1px 0; }
+/* legend */
+.ffx-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  justify-content: center;
+  max-width: var(--ffx-maxw);
+  margin: var(--space-6) auto 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-subtle);
+}
+.ffx-lg { display: inline-flex; align-items: center; gap: 7px; font-size: var(--fs-caption); color: var(--fg-muted); }
+.ffx-lg::before { content: ""; width: 11px; height: 11px; border-radius: 3px; border: 1.5px solid; }
+.ffx-lg-purple::before { background:#faf5ff; border-color: var(--tip-500); }
+.ffx-lg-green::before  { background: var(--success-50); border-color: var(--success-500); }
+.ffx-lg-orange::before { background: var(--color-accent-50); border-color: var(--color-accent-500); }
+.ffx-lg-red::before    { background: var(--danger-50); border-color: var(--danger-500); }
+@media (max-width: 640px) {
+  .ffx-split { grid-template-columns: 1fr; }
+  .ffx-aside-row { grid-template-columns: 1fr; }
+}
+
+
+
+/* WMS swimlane */
+.wms{--w-line:var(--border-strong);border:1px solid var(--border-default);border-radius:var(--radius-lg);background:var(--bg-surface);overflow:hidden;margin:var(--space-5) 0 var(--space-6);box-shadow:var(--shadow-sm);font-family:var(--font-sans)}.wms-title{display:flex;align-items:center;gap:10px;padding:13px 20px;font-size:15px;font-weight:var(--fw-semibold);color:var(--fg-strong);background:var(--bg-page);border-bottom:1px solid var(--border-default)}.wms-title-dot{width:8px;height:8px;border-radius:var(--radius-pill);background:var(--color-accent-500)}.wms-lane{display:grid;grid-template-columns:118px 1fr;border-bottom:1px solid var(--border-subtle)}.wms-lane:last-child{border-bottom:none}.wms-lane-label{display:flex;align-items:center;justify-content:center;text-align:center;padding:14px 12px;font-size:12.5px;font-weight:var(--fw-semibold);color:var(--fg-muted);letter-spacing:.01em;background:var(--bg-page);border-right:1px solid var(--border-subtle)}.wms-lane-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}.wms-row{display:flex;align-items:stretch;flex-wrap:wrap;gap:10px}.wms-step{flex:1 1 158px;min-width:152px;display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:var(--radius-md);border:1px solid var(--wstep-bd,var(--border-default));background:var(--wstep-bg,var(--bg-page))}.wms-num{flex:none;width:21px;height:21px;border-radius:var(--radius-pill);display:grid;place-items:center;font-size:11.5px;font-weight:var(--fw-bold);color:#fff;background:var(--wstep-ac,var(--fg-muted));margin-top:1px}.wms-step-title{font-size:13.5px;font-weight:var(--fw-semibold);color:var(--wstep-tx,var(--fg-strong));line-height:18px}.wms-step-sub{font-size:11.5px;line-height:16px;color:var(--fg-muted);margin-top:2px;text-wrap:pretty}.wms-conn{flex:none;align-self:center;display:flex;align-items:center;color:var(--fg-subtle)}.wms-step.is-blue{--wstep-bg:var(--color-accent-50);--wstep-bd:var(--color-accent-200);--wstep-ac:var(--color-accent-500);--wstep-tx:var(--color-accent-700)}.wms-step.is-green{--wstep-bg:#f0fdf4;--wstep-bd:#bbf7d0;--wstep-ac:#16a34a;--wstep-tx:#15803d}.wms-step.is-red{--wstep-bg:#fef2f2;--wstep-bd:#fecaca;--wstep-ac:#ef4444;--wstep-tx:#b91c1c}.wms-step.is-warn{--wstep-bg:#fffbeb;--wstep-bd:#fde68a;--wstep-ac:#d97706;--wstep-tx:#92400e}.wms-branch{margin-top:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 13px;border:1px dashed #fca5a5;border-radius:var(--radius-md);background:rgba(255,242,242,.55)}.wms-branch-lead{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:var(--fw-bold);color:#b91c1c;text-transform:uppercase;letter-spacing:.04em}.wms-flowdown{display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 0;color:var(--fg-subtle);font-size:11.5px;font-weight:var(--fw-medium)}.wms-foot{display:flex;justify-content:center;padding:14px 20px 18px;background:var(--bg-page);border-top:1px solid var(--border-subtle)}.wms-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:var(--radius-pill);background:#f0fdf4;border:1px solid #86efac;font-size:13px;font-weight:var(--fw-semibold);color:#15803d}@media(max-width:640px){.wms-lane{grid-template-columns:1fr}.wms-lane-label{border-right:none;border-bottom:1px solid var(--border-subtle);justify-content:flex-start}.wms-conn{display:none}.wms-step{flex:1 1 100%}}
