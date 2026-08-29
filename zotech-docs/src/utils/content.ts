@@ -440,7 +440,6 @@ export const docPages: DocPage[] = [
           { id: 'pos-cake-day-don-tu-dong' },
           { id: 'chia-so' },
           { id: 'cham-soc-co-hoi' },
-          { id: 'kho-so-chung' },
         ],
       },
       {
