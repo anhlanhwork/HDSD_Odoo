@@ -427,9 +427,9 @@ code:not(pre code) {
   vertical-align: top;
 }
 .table thead th {
-  background: var(--bg-surface);
+  background: var(--color-accent-500);
   font-weight: var(--fw-semibold);
-  color: var(--fg-strong);
+  color: #fff;
   font-size: 12.5px;
   letter-spacing: 0.02em;
   text-transform: uppercase;

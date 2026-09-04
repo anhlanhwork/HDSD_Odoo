@@ -23,6 +23,7 @@ import tangCaHtml from '../content/tang-ca.html?raw'
 import tuyenDungHtml from '../content/tuyen-dung.html?raw'
 import elearningHtml from '../content/elearning.html?raw'
 import bangLuongHtml from '../content/bang-luong.html?raw'
+import affiliateHtml from '../content/affiliate.html?raw'
 
 const CONTENT_MAP: Record<string, string> = {
   crm: crmHtml,
@@ -39,6 +40,7 @@ const CONTENT_MAP: Record<string, string> = {
   'tuyen-dung': tuyenDungHtml,
   'elearning': elearningHtml,
   'bang-luong': bangLuongHtml,
+  'affiliate': affiliateHtml,
 }
 
 export const DocPage: React.FC = () => {

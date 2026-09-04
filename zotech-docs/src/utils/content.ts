@@ -580,6 +580,136 @@ export const docPages: DocPage[] = [
       { id: 'goi-dien', label: 'Gọi điện' },
     ],
   },
+  {
+    slug: 'affiliate',
+    title: 'Affiliate',
+    group: 'Bán hàng & Khách hàng',
+    // Ported incrementally from the Claude Design project's affiliate.html,
+    // split into per-section files (e.g. affiliate-tong-quan-affiliate.html,
+    // one per real sidebar leaf below) to work around the design-sync
+    // fetch's 256 KiB cap. Each split file's own embedded sidebar copy
+    // reveals the module's full real IA (confirmed straight from the
+    // source, not guessed):
+    //   Giới thiệu hệ thống: tong-quan-affiliate, phan-quyen-affiliate,
+    //     quy-trinh-van-hanh-aff
+    //   Cấu hình ban đầu: cai-dat-affiliate, app-affiliate,
+    //     chinh-sach-hoa-hong, phan-loai-nha-sang-tao, nen-tang,
+    //     loai-booking, giai-doan-booking, link-bieu-mau, kpi-affiliate
+    //   Quy trình & tính năng: tong-quan-aff, chuong-trinh-cong-tac, shop,
+    //     + subgroup "Booking": bk-nha-sang-tao, bk-ho-so-creator,
+    //       bk-cau-hinh-nhan-su, bk-chien-dich, bk-deal, bk-do-luong-video
+    //     + subgroup "Đơn hàng Affiliate": dh-don-lien-ket,
+    //       dh-doanh-so-booking
+    // The entire "Giới thiệu hệ thống" group (tong-quan-affiliate,
+    // phan-quyen-affiliate, quy-trinh-van-hanh-aff), 8 of the 9 items of
+    // "Cấu hình ban đầu" (cai-dat-affiliate, app-affiliate,
+    // chinh-sach-hoa-hong, nen-tang, loai-booking, giai-doan-booking,
+    // link-bieu-mau, kpi-affiliate), 2 of the "Quy trình & tính năng" items
+    // (chuong-trinh-cong-tac, shop), its entire "Booking" subgroup
+    // (bk-nha-sang-tao, bk-ho-so-creator, bk-deal, bk-cau-hinh-nhan-su,
+    // bk-chien-dich, bk-do-luong-video), and its entire "Đơn hàng Affiliate"
+    // subgroup (dh-don-lien-ket, dh-doanh-so-booking) are now ported with
+    // real content — each
+    // wrapped in <section class="yc-doc"> (not left bare like CRM's
+    // 'muc-dich') because that's how the source models it: fully routed
+    // sidebar leaves with the "feature page" treatment (big accent h2,
+    // uppercase accent h3 dividers, gradient table header), not a flat
+    // module intro. toc/sidebarTree below only list what's actually
+    // implemented; only 'phan-loai-nha-sang-tao' (the sole remaining "Cấu
+    // hình ban đầu" item) and 'tong-quan-aff' (real position before
+    // chuong-trinh-cong-tac in "Quy trình & tính năng" — a different id
+    // from 'tong-quan-affiliate' below) are left out until ported so
+    // clicking a sidebar item never lands on a blank panel — every other
+    // real IA leaf is now live.
+    // 'tong-quan-affiliate' is intentionally NOT in toc/overviewExtra even
+    // though its content (id="tong-quan-affiliate" in affiliate.html) is
+    // ported: listing it would duplicate the synthetic bare "Tổng quan ứng
+    // dụng Affiliate" link that getSidebarTree() already prepends to
+    // "Giới thiệu hệ thống" (user-reported as "thừa menu tổng quan ứng
+    // dụng"). Leaving it out of toc means useFeaturePanels treats it as
+    // ordinary overview content (same trade-off as CRM's 'muc-dich') — it
+    // still renders, just always as part of the overview panel rather than
+    // its own routed sidebar leaf.
+    // Note: 'bk-chien-dich' references one image (aff-cdbk-04.png, "Tab
+    // Booking deals"), 'dh-don-lien-ket' references two more
+    // (aff-donlienket-step1-access.png, aff-donlienket-form-tab-affiliate.png)
+    // and 'dh-doanh-so-booking' references one more
+    // (aff-doanhso-step1-access.png) that the design-sync image fetch
+    // truncated past its cap (no PNG IEND chunk) — those steps are
+    // text-only until the images can be re-supplied.
+    // All screenshots for 'bk-nha-sang-tao' and 'bk-deal' are now embedded,
+    // including the 7 that the design-sync image fetch originally
+    // truncated past its 256KiB cap (no PNG IEND chunk) — the user supplied
+    // those directly as local files (aff-nst-04.png, aff-nst-form-03.png,
+    // aff-deal-step4-popup-benA/benB/noidung/giatri/chiadot.png,
+    // aff-deal-step5-danhdau-air.png).
+    toc: [
+      { id: 'phan-quyen-affiliate', label: 'Phân quyền ứng dụng' },
+      { id: 'quy-trinh-van-hanh-aff', label: 'Quy trình vận hành' },
+      { id: 'cai-dat-affiliate', label: 'Cài đặt Affiliate' },
+      { id: 'app-affiliate', label: 'App Affiliate' },
+      { id: 'chinh-sach-hoa-hong', label: 'Chính sách hoa hồng' },
+      { id: 'nen-tang', label: 'Nền tảng' },
+      { id: 'loai-booking', label: 'Loại booking' },
+      { id: 'giai-doan-booking', label: 'Giai đoạn booking' },
+      { id: 'link-bieu-mau', label: 'Link biểu mẫu' },
+      { id: 'kpi-affiliate', label: 'KPI Affiliate' },
+      { id: 'chuong-trinh-cong-tac', label: 'Chương trình cộng tác' },
+      { id: 'shop', label: 'Shop' },
+      { id: 'bk-nha-sang-tao', label: 'Nhà sáng tạo' },
+      { id: 'bk-ho-so-creator', label: 'Hồ sơ Creator' },
+      { id: 'bk-deal', label: 'Deal Booking' },
+      { id: 'bk-cau-hinh-nhan-su', label: 'Cấu hình nhân sự booking' },
+      { id: 'bk-chien-dich', label: 'Chiến dịch booking' },
+      { id: 'bk-do-luong-video', label: 'Đo lường chỉ số Videos' },
+      { id: 'dh-don-lien-ket', label: 'Đơn hàng liên kết' },
+      { id: 'dh-doanh-so-booking', label: 'Doanh số booking' },
+    ],
+    overviewExtra: ['phan-quyen-affiliate', 'quy-trinh-van-hanh-aff'],
+    // An explicit tree (rather than omitting sidebarTree) opts out of the
+    // "Các tính năng & quy trình" fallback group, which would otherwise
+    // list every toc id a second time flat. Fill in the rest of "Cấu hình
+    // ban đầu" and "Quy trình & tính năng" (with its Booking / Đơn hàng
+    // Affiliate subgroups) as their sections get ported — see the real IA
+    // note above.
+    sidebarTree: [
+      {
+        label: 'Cấu hình ban đầu',
+        children: [
+          { id: 'cai-dat-affiliate' },
+          { id: 'app-affiliate' },
+          { id: 'chinh-sach-hoa-hong' },
+          { id: 'nen-tang' },
+          { id: 'loai-booking' },
+          { id: 'giai-doan-booking' },
+          { id: 'link-bieu-mau' },
+          { id: 'kpi-affiliate' },
+        ],
+      },
+      {
+        label: 'Quy trình & tính năng',
+        children: [
+          { id: 'chuong-trinh-cong-tac' },
+          { id: 'shop' },
+          {
+            label: 'Booking',
+            children: [
+              { id: 'bk-nha-sang-tao' },
+              { id: 'bk-ho-so-creator' },
+              { id: 'bk-deal' },
+              { id: 'bk-cau-hinh-nhan-su' },
+              { id: 'bk-chien-dich' },
+              { id: 'bk-do-luong-video' },
+            ],
+          },
+          {
+            label: 'Đơn hàng Affiliate',
+            children: [{ id: 'dh-don-lien-ket' }, { id: 'dh-doanh-so-booking' }],
+          },
+        ],
+      },
+    ],
+  },
 
   // Nhân sự
   {
@@ -732,13 +862,13 @@ export const getPageBySlug = (slug: string): DocPage | undefined => {
 
 // Slugs that have real ported article content (see src/content/<slug>.html).
 // Everything else falls back to a placeholder in DocPage.
-export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop', 'kho-hang', 'mua-hang'])
+export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-don', 'bat-xac-thuc-2-lop', 'kho-hang', 'mua-hang', 'affiliate'])
 
 // Deploy-time visibility gate: only these modules appear on the homepage
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang', 'nhan-vien', 'nghi-phep', 'tang-ca', 'cham-cong', 'tuyen-dung', 'elearning', 'bang-luong'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang', 'nhan-vien', 'nghi-phep', 'tang-ca', 'cham-cong', 'tuyen-dung', 'elearning', 'bang-luong', 'affiliate'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
@@ -781,7 +911,11 @@ export const getSidebarTree = (page: DocPage): RenderedSidebarNode[] => {
   // straight to the feature list.
   const isNhanSu = page.group === 'Nhân sự'
   const prefix = isNhanSu ? [] : [overview]
-  if (page.sidebarTree?.length) {
+  // Checks presence, not truthiness of .length: an explicit sidebarTree: []
+  // means "everything is already placed via overviewExtra, no fallback
+  // group" — distinct from omitting sidebarTree entirely (which does want
+  // the fallback below).
+  if (page.sidebarTree) {
     return [...prefix, ...page.sidebarTree.map((n) => resolveSidebarNode(n, byId))]
   }
   const featureLeaves: RenderedSidebarNode[] = page.toc.map((t) => ({ kind: 'leaf' as const, id: t.id, label: t.label }))
