@@ -24,6 +24,9 @@ import tuyenDungHtml from '../content/tuyen-dung.html?raw'
 import elearningHtml from '../content/elearning.html?raw'
 import bangLuongHtml from '../content/bang-luong.html?raw'
 import affiliateHtml from '../content/affiliate.html?raw'
+import tamUngNhanVienHtml from '../content/tam-ung-nhan-vien.html?raw'
+import quanLyQuangCaoHtml from '../content/quan-ly-quang-cao.html?raw'
+import chiPhiHtml from '../content/chi-phi.html?raw'
 
 const CONTENT_MAP: Record<string, string> = {
   crm: crmHtml,
@@ -41,6 +44,9 @@ const CONTENT_MAP: Record<string, string> = {
   'elearning': elearningHtml,
   'bang-luong': bangLuongHtml,
   'affiliate': affiliateHtml,
+  'tam-ung-nhan-vien': tamUngNhanVienHtml,
+  'quan-ly-quang-cao': quanLyQuangCaoHtml,
+  'chi-phi': chiPhiHtml,
 }
 
 export const DocPage: React.FC = () => {
