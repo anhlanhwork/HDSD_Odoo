@@ -697,6 +697,12 @@ export const docPages: DocPage[] = [
     // (aff-doanhso-step1-access.png) that the design-sync image fetch
     // truncated past its cap (no PNG IEND chunk) — those steps are
     // text-only until the images can be re-supplied.
+    // 'bk-nha-sang-tao' was re-synced against the current design source
+    // (affiliate-bk-nha-sang-tao.html): the "Lấy link biểu mẫu" walkthrough
+    // was missing its final 3 steps (duyệt hồ sơ biểu mẫu + kết quả áp dụng),
+    // now added. aff-nst-form-04.png is embedded; aff-nst-form-05.png hit the
+    // design-sync image fetch's 256KiB cap (no PNG IEND chunk) and is
+    // text-only until re-supplied.
     // All screenshots for 'bk-nha-sang-tao' and 'bk-deal' are now embedded,
     // including the 7 that the design-sync image fetch originally
     // truncated past its 256KiB cap (no PNG IEND chunk) — the user supplied

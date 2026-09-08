@@ -57,9 +57,9 @@ export const DocPage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const featureIds = page?.toc.map((t) => t.id) ?? []
 
-  const { tocItems, activeTocId } = useFeaturePanels(containerRef, featureIds, activeFeature)
+  const { view, tocItems, activeTocId } = useFeaturePanels(containerRef, featureIds, activeFeature)
   useLightbox(containerRef)
-  useInternalLinks(containerRef, slug, featureIds)
+  useInternalLinks(containerRef, slug, featureIds, view)
   useAccordion(containerRef)
 
   if (!page) {

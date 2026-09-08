@@ -54,7 +54,16 @@ export function useFeaturePanels(
       }
       el.style.display = view === 'overview' ? (group === 'overview' ? '' : 'none') : group === view ? '' : 'none'
     })
-    window.scrollTo({ top: 0, behavior: 'auto' })
+    // A cross-panel link (see useInternalLinks) navigates here with a
+    // "#sub-heading-id" hash when the target lives inside this panel but
+    // isn't itself a routable feature id. Once the right panel is visible,
+    // scroll straight to that sub-heading instead of resetting to the top.
+    const hash = window.location.hash.slice(1)
+    if (hash) {
+      scrollToTocTarget(root, decodeURIComponent(hash))
+    } else {
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef, featureIdsKey, view])
 
