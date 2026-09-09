@@ -27,6 +27,7 @@ import affiliateHtml from '../content/affiliate.html?raw'
 import tamUngNhanVienHtml from '../content/tam-ung-nhan-vien.html?raw'
 import quanLyQuangCaoHtml from '../content/quan-ly-quang-cao.html?raw'
 import chiPhiHtml from '../content/chi-phi.html?raw'
+import lienHeHtml from '../content/lien-he.html?raw'
 
 const CONTENT_MAP: Record<string, string> = {
   crm: crmHtml,
@@ -47,6 +48,7 @@ const CONTENT_MAP: Record<string, string> = {
   'tam-ung-nhan-vien': tamUngNhanVienHtml,
   'quan-ly-quang-cao': quanLyQuangCaoHtml,
   'chi-phi': chiPhiHtml,
+  'lien-he': lienHeHtml,
 }
 
 export const DocPage: React.FC = () => {

@@ -466,6 +466,38 @@ export const docPages: DocPage[] = [
       },
     ],
   },
+  // Ported from the Claude Design project's lien-he.html — the "Liên hệ –
+  // Contacts" module the crm.html porting note flagged as a separate
+  // sibling of CRM in the real sidebar, not yet ported at the time. The
+  // design source models it the same way as affiliate's 'tong-quan-*'
+  // pattern: two <section class="yc-doc"> blocks (overview + permissions),
+  // both wrapped rather than left bare. 'tong-quan-ung-dung' is left out of
+  // toc/overviewExtra (same trade-off as affiliate's 'tong-quan-affiliate')
+  // — it still renders, just as part of the overview panel, and
+  // overviewExtra's synthetic "Tổng quan ứng dụng {title}" link already
+  // covers it. The get_file fetch hit its 256KiB cap partway through the
+  // last sentence of the permissions section's closing callout; that
+  // sentence is a verbatim repeat of the section's own opening lede
+  // (confirmed by the matching prefix up to the cut point) and was
+  // completed on that basis rather than guessed. The design source's
+  // "Luồng 1&4 / Luồng 2&3" process breakdown used a JS tab widget
+  // (onclick="switchTab(...)") that has no runtime support in this app (no
+  // switchTab() function, no tab-handling hook) — ported as two
+  // always-visible table blocks with a heading each instead of an
+  // interactive tab pair. The design source's own accordion wrapper div in
+  // the FAQ was missing its closing </div> (relies on browsers'
+  // implicit-close recovery); fixed when porting since dangerouslySetInnerHTML
+  // gets the same browser HTML-parser leniency but there's no reason to
+  // carry the typo forward. No screenshots — the module is all diagrams/
+  // cards, so no "ảnh minh họa" badge.
+  {
+    slug: 'lien-he',
+    title: 'Liên hệ',
+    group: 'Bán hàng & Khách hàng',
+    toc: [{ id: 'phan-quyen-lien-he', label: 'Phân quyền ứng dụng' }],
+    overviewExtra: ['phan-quyen-lien-he'],
+    sidebarTree: [],
+  },
   {
     slug: 'ban-hang',
     title: 'Bán hàng',
@@ -1310,7 +1342,7 @@ export const IMPLEMENTED_SLUGS = new Set(['crm', 'logistics', 'ecommerce', 'hoa-
 // and sidebar, and are reachable at all (other slugs 404 via DocPage) —
 // used to publish a subset of modules (e.g. just Ecommerce) while the
 // rest are still in progress. Set to `null` to show everything again.
-export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang', 'nhan-vien', 'nghi-phep', 'tang-ca', 'cham-cong', 'tuyen-dung', 'elearning', 'bang-luong', 'affiliate', 'tam-ung-nhan-vien', 'quan-ly-quang-cao', 'chi-phi'])
+export const PUBLIC_SLUGS: Set<string> | null = new Set(['ecommerce', 'hoa-don', 'logistics', 'bat-xac-thuc-2-lop', 'kho-hang', 'crm', 'mua-hang', 'nhan-vien', 'nghi-phep', 'tang-ca', 'cham-cong', 'tuyen-dung', 'elearning', 'bang-luong', 'affiliate', 'tam-ung-nhan-vien', 'quan-ly-quang-cao', 'chi-phi', 'lien-he'])
 
 export const isPublicPage = (page: DocPage): boolean => !PUBLIC_SLUGS || PUBLIC_SLUGS.has(page.slug)
 
